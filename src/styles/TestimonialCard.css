@@ -1,0 +1,132 @@
+.testimonial-posuere-sollicitudin-aliquam {
+  width: 253.1px;
+  position: relative;
+  line-height: 147.5%;
+  white-space: pre-wrap;
+  display: inline-block;
+  flex-shrink: 0;
+  word-wrap: break-word;
+}
+.testimonial-text {
+  position: absolute;
+  top: 103px;
+  left: 0;
+  border-radius: var(--br-xl);
+  background-color: var(--color-gray-100);
+  width: 313.1px;
+  min-height: 57%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xl) var(--padding-11xl);
+  box-sizing: border-box;
+  font-family: var(--font-lato);
+}
+.testimonial-image-icon {
+  width: 81px;
+  position: relative;
+  height: 81px;
+  object-fit: cover;
+}
+.kathleen-smith {
+  position: relative;
+  line-height: 116%;
+  font-weight: 600;
+}
+.sub-text-child {
+  width: 18px;
+  position: relative;
+  height: 18px;
+}
+.testimonial-name,
+.sub-text {
+  display: flex;
+  justify-content: flex-start;
+}
+.sub-text {
+  border-radius: var(--br-xl);
+  flex-direction: row;
+  align-items: center;
+  padding: var(--padding-12xs) 0;
+  gap: var(--gap-9xs);
+}
+.testimonial-name {
+  width: 132px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-6xs);
+}
+
+.testimonial-child {
+  top: 42.5px;
+  left: 0;
+  border-radius: 50%;
+  background-color: var(--color-gray-200);
+  width: 46.7px;
+  height: 46.7px;
+}
+.testimonial-child,
+.testimonial-div2 {
+  position: absolute;
+}
+.testimonial-div2 {
+  top: 102px;
+  left: 36.8px;
+  line-height: 147.5%;
+  transform: rotate(-180deg);
+  transform-origin: 0 0;
+}
+.testimonial-section .div {
+  border-radius: var(--br-21xl);
+  background-color: var(--color-whitesmoke);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xl);
+}
+.testimonial-div4,
+.testimonial-user1 {
+  position: absolute;
+}
+.testimonial-user1 {
+  top: 0;
+  left: 0.1px;
+  width: 226px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-smi);
+  font-size: var(--font-size-xl);
+  color: var(--color-gray-200);
+}
+.testimonial-div4 {
+  top: 40.8px;
+  left: 231.3px;
+  width: 46.7px;
+  height: 102px;
+  font-size: var(--font-size-50xl);
+  color: var(--color-white);
+}
+.testimonial-content2 {
+  width: 313.1px;
+  position: relative;
+  height: 255px;
+}
+
+.testimonial-div3 {
+  margin: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 356px;
+}
+.testimonial-div3 {
+  border-radius: var(--br-21xl);
+  background-color: var(--color-whitesmoke);
+  flex-direction: column;
+  padding: var(--padding-xl) var(--padding-2xl);
+}

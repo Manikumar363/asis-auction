@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@700&display=swap");
+.frame-parent {
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --font-roboto: Roboto;
+  --font-work-sans: "Work Sans";
+
+  /* font sizes */
+  --font-size-base: 16px;
+  --font-size-5xl: 24px;
+  --font-size-lgi: 19px;
+  --font-size-lg: 18px;
+
+  /* Colors */
+  --color-gray-100: #888;
+  --color-gray-200: #222;
+  --color-gray-300: #070707;
+  --color-goldenrod-100: #f4c23d;
+  --color-goldenrod-200: rgba(244, 194, 61, 0.08);
+  --color-lightsteelblue: #b8dcfe;
+
+  /* Gaps */
+  --gap-11xl: 30px;
+  --gap-239xl: 258px;
+
+  /* Paddings */
+  --padding-12xl: 31px;
+  --padding-xl: 20px;
+  --padding-8xl: 27px;
+  --padding-5xs: 8px;
+  --padding-lg: 18px;
+  --padding-52xl: 71px;
+  --padding-mid: 17px;
+  --padding-6xs: 7px;
+  --padding-16xl: 35px;
+
+  /* Border radiuses */
+  --br-21xl: 40px;
+  --br-5xl-4: 24.4px;
+}

@@ -1,0 +1,122 @@
+.testimonial-section {
+  text-align: left;
+}
+.arrow-button {
+  width: 60px; /* Adjust size as needed */
+  height: 60px; /* Adjust size as needed */
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.left-arrow {
+  color: white;
+  background-image: url("../../public/assets/images/right_arrow_circle_icon.svg");
+  transform: scaleX(-1);
+}
+
+.right-arrow {
+  background-image: url("../../public/assets/images/right_arrow_circle_icon.svg");
+}
+
+.arrow-button {
+  color: white;
+}
+
+.testimonial-section {
+  height: 630px;
+  box-sizing: border-box;
+  padding: 40px 0 30px 50px;
+  display: flex;
+  flex-direction: column;
+}
+.testimonial-buttons-heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+.testimonial-content {
+  width: 100%;
+  margin-top: 80px;
+  border-radius: 40px;
+  padding: 10px;
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.testimonial-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.testimonial-content {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.testimonial-heading-client {
+  font-size: 40px;
+  font-weight: 700;
+}
+.testimonial-heading-caption {
+  margin-top: 7px;
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 880px) {
+  .testimonial-buttons {
+    display: none;
+  }
+  .testimonial-section {
+    padding-bottom: 0;
+  }
+  .testimonial-heading-client {
+    font-size: 25px;
+  }
+  .testimonial-heading-caption {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .testimonial-section {
+    padding: 15px 0 30px 0px;
+    height: 580px;
+  }
+  .testimonial-content {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .testimonial-buttons-heading {
+    padding-left: 20px;
+  }
+  .testimonial-content {
+    padding-left: 0;
+  }
+  .testimonial-div3 {
+    width: 282px;
+    padding-left: 15px;
+  }
+  .testimonial-content2 {
+    width: 246px;
+  }
+  .testimonial-text {
+    width: 252px;
+    padding: 20px 15px;
+  }
+  .testimonial-posuere-sollicitudin-aliquam {
+    width: 225px;
+  }
+  .testimonial-div4 {
+    left: 202px;
+  }
+}
