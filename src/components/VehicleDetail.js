@@ -23,8 +23,8 @@ import RightInfo from "./RightInfo.js";
 import ProductCarousel from "./VehicleCarousel.js";
 import id from "date-fns/esm/locale/id/index.js";
 
-// const url = "https://api.asisauctions.com.au";
-const url  = "http://localhost:4000"
+const url = "https://api.asisauctions.com.au";
+// const url  = "http://localhost:4000"
 
 const ProductDetail = ({ auctionId }) => {
   const location = useLocation();
