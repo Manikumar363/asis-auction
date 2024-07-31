@@ -225,7 +225,7 @@ export const updateAutobid = async (dispatch, data) => {
       { headers: { Authorization: `${token}` } }
     );
     console.log(data);
-    toast.success("AutoBID Started!", successToastOptions);
+    // toast.success("AutoBID Started!", successToastOptions);
     dispatch(AutoBidSuccess(data));
     return data;
   } catch (error) {
