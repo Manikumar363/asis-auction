@@ -75,8 +75,8 @@ const Form = () => {
           { length: currentYear - 2009 },
           (_, index) => currentYear - index
         );
-        alert("For testing purpose these are allowed dates for manu")
-        alert(manufacturingYearRange)
+        // alert("For testing purpose these are allowed dates for manu")
+        // alert(manufacturingYearRange)
       
         if(manufacturingYearRange.includes(parseInt(formData.manufacture_year))){
           
