@@ -497,7 +497,7 @@ const ProductDetail = ({ auctionId }) => {
             socket.current.emit("bidreceived", dat2);
           }
         } catch (error) {
-          toast.error("you are current highest bidder ", ErrorToastOptions);
+          toast.error("try again later", ErrorToastOptions);
         }
       } else {
         toast.error(

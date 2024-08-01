@@ -1052,7 +1052,7 @@ const Signup = () => {
       passportnumber,
       country
     } = values;
-    alert(JSON.stringify(values));
+    // alert(JSON.stringify(values));
 
     var { document } = values;
 
