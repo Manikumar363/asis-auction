@@ -32,18 +32,21 @@ const LeftInfo = memo(
     handleAutoBidChange,
     autoBidDetails,
     handleAutoBidUpdate,
+    bidder
   }) => {
     const { isFetching } = useSelector((state) => state.vehicle);
     const { isAutoBid } = useSelector((state) => state.bid);
     const { isPlacingBid } = useSelector((state) => state.bid);
     const [showUpdateField, setShowUpdateField] = useState(false);
-
+   console.log(bidder,'bidder in leftinfo');
     const hasAuctionEnded =
       timer.days <= 0 &&
       timer.hours <= 0 &&
       timer.minutes <= 0 &&
       timer.seconds <= 0;
-
+   console.log(previewAmount,'previewAmount' ,autoBidValue,'autoBidValue', price ,'price');
+   const userId = useSelector((state)=>state.auth.user)
+   console.log(bidder,'bidder');
     return (
       <div id="left-info ">
         <div className="details">
@@ -139,6 +142,7 @@ const LeftInfo = memo(
                             </p>
                           </>
                         )}
+                       
                       </>
                     </p>
                   </>
@@ -277,7 +281,7 @@ const LeftInfo = memo(
                           }}
                           className="advanced-button m-0"
                         >
-                          Update
+                          Update 
                         </button>
                         <p
                           className="p-1 m-1 text-dark  text-center"
@@ -302,7 +306,7 @@ const LeftInfo = memo(
                             onClick={handleAutoBidUpdate}
                             disabled={
                               isNaN(parseFloat(previewAmount)) ||
-                              previewAmount != autoBidValue
+                              previewAmount != autoBidValue 
                             }
                           >
                             {isAutoBid ? (
@@ -313,7 +317,7 @@ const LeftInfo = memo(
                                 />
                               </>
                             ) : (
-                              <> Update</>
+                              <> Update  </>
                             )}
                           </button>
                           <input
@@ -354,7 +358,7 @@ const LeftInfo = memo(
                         onClick={handleAutoBid}
                         disabled={
                           isNaN(parseFloat(previewAmount)) ||
-                          previewAmount != autoBidValue
+                          previewAmount != autoBidValue 
                         }
                       >
                         {isAutoBid ? (
@@ -365,7 +369,7 @@ const LeftInfo = memo(
                             />
                           </>
                         ) : (
-                          <> Set</>
+                          <> Set </>
                         )}
                       </button>
                       <input

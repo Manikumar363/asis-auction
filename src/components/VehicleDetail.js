@@ -45,6 +45,7 @@ const ProductDetail = ({ auctionId }) => {
   const navigate = useNavigate();
   const [autoBidEnabled, setAutoBidEnabled] = useState(false);
   const [autoBidValue, setAutoBidValue] = useState("");
+  const [bidder,setBidder] = useState('')
   const [timer, setTimer] = useState({
     days: 0,
     hours: 0,
@@ -220,19 +221,20 @@ const ProductDetail = ({ auctionId }) => {
               setPrice(amount);
               // fetchDetails();
               execute();
-
+ console.log(data,'bidemit data');
               const dat2 = {
                 bid_amount: data.bid.bid_amount,
                 reserve_flag: data.reserve_flag,
                 auction: auctionId,
+                bidder :data?.bid.bidder
               };
-
+                
               socket.current.emit("bidreceived", dat2);
               setAmount("");
             }
           } catch (error) {
-            
-            toast.error("Try Again Later!", ErrorToastOptions);
+             console.log(error ,'1');
+            // toast.error("Try Again Later! 1", ErrorToastOptions);
           }
 
           // console.log("Condition met!");
@@ -266,6 +268,8 @@ const ProductDetail = ({ auctionId }) => {
                 bid_amount: data.bid.bid_amount,
                 reserve_flag: data.reserve_flag,
                 auction: auctionId,
+                bidder :data?.bid.bidder
+
               };
               // console.log(dat2);
               setAmount("");
@@ -281,7 +285,8 @@ const ProductDetail = ({ auctionId }) => {
               // });
             }
           } catch (error) {
-            toast.error("Try Again Later!", ErrorToastOptions);
+            console.log(error,'2');
+            // toast.error("Try Again Later! 2", ErrorToastOptions);
           }
 
           // console.log("Condition met!");
@@ -313,6 +318,7 @@ const ProductDetail = ({ auctionId }) => {
         setPrice(highestBidAmount);
         setReserveFlag(data?.auction?.reserve_flag);
         console.log("everything done");
+        console.log(data ,'data.auction 1');
       };
 
       const handleSocketConnect = () => {
@@ -326,14 +332,16 @@ const ProductDetail = ({ auctionId }) => {
       const handleSocketDisconnect = () => {
         // console.log("Socket disconnected");
       };
-
+         
       socket.current.on("bidemitted", (data) => {
         const highestBidAmount =
           data.auction?.highest_bid === 0
             ? "No Bid"
             : data.auction?.highest_bid;
         setPrice(highestBidAmount);
+        setBidder(data?.data?.bidder)
         setReserveFlag(data?.auction?.reserve_flag);
+        console.log( data?.data?.bidder ,'data.auction 2');
       });
       socket.current.on("connect", handleSocketConnect);
       socket.current.on("connect_error", handleSocketError);
@@ -453,17 +461,20 @@ const ProductDetail = ({ auctionId }) => {
         if (data) {
           setPrice(amount);
           fetchDetails();
-          
+        
           const dat2 = {
             bid_amount: data?.bid?.bid_amount,
             reserve_flag: data?.reserve_flag,
             auction: auctionId,
+            bidder :data?.bid.bidder
+
           };
           console.log(dat2);
           socket.current.emit("bidreceived", dat2);
         }
       } catch (error) {
-        toast.error("Try Again Later!", ErrorToastOptions);
+        console.log(error,'3');
+        // toast.error("Try Again Later! 3", ErrorToastOptions);
       }
       // } else {
       //   toast.error(
@@ -489,15 +500,18 @@ const ProductDetail = ({ auctionId }) => {
             // fetchDetails();
             // execute();
             const dat2 = {
-              bid_amount: data.bid.bid_amount,
-              reserve_flag: data.reserve_flag,
+              bid_amount: data?.bid?.bid_amount,
+              reserve_flag: data?.reserve_flag,
               auction: auctionId,
+              bidder :data?.bid?.bidder
+
             };
             console.log(dat2);
             socket.current.emit("bidreceived", dat2);
           }
         } catch (error) {
-          toast.error("try again later", ErrorToastOptions);
+          console.log(error,'error is printing');
+          // toast.error("try again later 4", ErrorToastOptions);
         }
       } else {
         toast.error(
@@ -549,6 +563,7 @@ const ProductDetail = ({ auctionId }) => {
             handleAutoBidChange={handleAutoBidChange}
             autoBidDetails={autoBidDetails}
             handleAutoBidUpdate={handleAutoBidUpdate}
+            bidder={bidder}
           />
         </div>
 
