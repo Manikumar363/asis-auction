@@ -135,7 +135,7 @@ const ProductDetail = ({ auctionId }) => {
           headers: { Authorization: token },
         }
       );
-
+   console.log(data,'data in fetchDeatils fun');
       setAuction(data?.auction);
       setCarDetails(data?.auction?.car);
       setVehicle_type(data?.auction?.car?.vehicle_type);
@@ -466,14 +466,16 @@ const ProductDetail = ({ auctionId }) => {
             bid_amount: data?.bid?.bid_amount,
             reserve_flag: data?.reserve_flag,
             auction: auctionId,
-            bidder :data?.bid.bidder
+            bidder :data?.bid?.bidder
 
           };
+          console.log(data,'data in 472');
           console.log(dat2);
           socket.current.emit("bidreceived", dat2);
+
         }
       } catch (error) {
-        console.log(error,'3');
+        console.log(error,'error 3');
         // toast.error("Try Again Later! 3", ErrorToastOptions);
       }
       // } else {

@@ -38,15 +38,15 @@ const LeftInfo = memo(
     const { isAutoBid } = useSelector((state) => state.bid);
     const { isPlacingBid } = useSelector((state) => state.bid);
     const [showUpdateField, setShowUpdateField] = useState(false);
-   console.log(bidder,'bidder in leftinfo');
+  //  console.log(bidder,'bidder in leftinfo');
     const hasAuctionEnded =
       timer.days <= 0 &&
       timer.hours <= 0 &&
       timer.minutes <= 0 &&
       timer.seconds <= 0;
-   console.log(previewAmount,'previewAmount' ,autoBidValue,'autoBidValue', price ,'price');
+  //  console.log(previewAmount,'previewAmount' ,autoBidValue,'autoBidValue', price ,'price');
    const userId = useSelector((state)=>state.auth.user)
-   console.log(bidder,'bidder');
+  //  console.log(bidder,'bidder');
     return (
       <div id="left-info ">
         <div className="details">
@@ -356,6 +356,7 @@ const LeftInfo = memo(
                       <button
                         className="advanced-button m-0"
                         onClick={handleAutoBid}
+                     
                         disabled={
                           isNaN(parseFloat(previewAmount)) ||
                           previewAmount != autoBidValue 
