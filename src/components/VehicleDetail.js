@@ -448,7 +448,7 @@ const ProductDetail = ({ auctionId }) => {
   };
 
   const handleAutoBid = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     if (!token) {
       toast("Login to Place Bid", ErrorToastOptions);
       navigate("/login");

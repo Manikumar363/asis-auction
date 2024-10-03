@@ -355,7 +355,7 @@ const LeftInfo = memo(
                     >
                       <button
                         className="advanced-button m-0"
-                        onClick={handleAutoBid}
+                        onClick={(e)=>handleAutoBid(e)}
                      
                         disabled={
                           isNaN(parseFloat(previewAmount)) ||
@@ -395,9 +395,9 @@ const LeftInfo = memo(
                       type="checkbox"
                       id="autoBidSwitch"
                       checked={autoBidEnabled}
-                      onChange={() => {
+                      onChange={(e) => {
                         setAutoBidEnabled(!autoBidEnabled);
-                        handleAutoBid();
+                        handleAutoBid(e);
                         console.log("changing");
                       }}
                     />
