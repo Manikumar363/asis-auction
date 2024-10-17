@@ -23,7 +23,7 @@ import RightInfo from "./RightInfo.js";
 import ProductCarousel from "./VehicleCarousel.js";
 import id from "date-fns/esm/locale/id/index.js";
 
-const url = "https://api.asisauctions.com.au";
+const url = "https://api.asisauctions.com.au"; 
 // const url  = "http://localhost:4000"
 
 const ProductDetail = ({ auctionId }) => {
@@ -59,7 +59,6 @@ const ProductDetail = ({ auctionId }) => {
     phone: "",
     message: "",
   });
-
   const ErrorToastOptions = {
     position: "bottom-center",
     autoClose: 3000,
@@ -219,7 +218,7 @@ const ProductDetail = ({ auctionId }) => {
             let data = await placebid(dispatch, { bid_amount, auctionId });
             if (data) {
               setPrice(amount);
-              // fetchDetails();
+              fetchDetails();
               execute();
  console.log(data,'bidemit data');
               const dat2 = {

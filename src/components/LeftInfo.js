@@ -1,9 +1,11 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap";
 import ReactPlaceholder from "react-placeholder";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Timer from "./Timer.js";
+import { io } from "socket.io-client";
+
 const LeftInfo = memo(
   ({
     auction,
@@ -34,6 +36,43 @@ const LeftInfo = memo(
     handleAutoBidUpdate,
     bidder
   }) => {
+    // console.log(auction,'auctionnnn');
+  //   new logic start socket 
+const url = "https://api.asisauctions.com.au";
+// const url  = "http://localhost:4000"
+
+const socket = useRef();
+const [fastPrice,setFastPrice] = useState(price)
+useEffect(() => {
+  socket.current = io(url);
+  if (auction?._id) {
+    const auctionId = auction._id
+    socket.current.emit("join",{auctionId} );
+  console.log('socket in left info connected');
+
+  }
+},[]);
+
+useEffect(()=>{
+  socket.current.on("bidemitted", (data) => {
+    const highestBidAmount =
+      data.data?.bid_amount === 0
+        ? "No Bid"
+        : data?.data?.bid_amount;
+    console.log(data.data.bid_amount, 'dataaa in left infffoo 11');
+
+        setFastPrice(highestBidAmount)
+  });
+  console.log( 'dataaa in left infffoo 22');
+
+},[])
+
+
+
+  //  end new logic socket 
+   
+   
+
     const { isFetching } = useSelector((state) => state.vehicle);
     const { isAutoBid } = useSelector((state) => state.bid);
     const { isPlacingBid } = useSelector((state) => state.bid);
@@ -97,7 +136,7 @@ const LeftInfo = memo(
                 )}
 
                 <span style={{ color: "red" }} className="h5">
-                  $ {price}{" "}
+                  $ { fastPrice || price}{" "} 
                 </span>
               </div>
               <div>
