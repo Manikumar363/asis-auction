@@ -343,10 +343,10 @@ useEffect(()=>{
                           <button
                             className="advanced-button m-0"
                             onClick={handleAutoBidUpdate}
-                            disabled={
-                              isNaN(parseFloat(previewAmount)) ||
-                              previewAmount != autoBidValue 
-                            }
+                            // disabled={
+                            //   isNaN(parseFloat(previewAmount)) ||
+                            //   previewAmount != autoBidValue 
+                            // }
                           >
                             {isAutoBid ? (
                               <>
@@ -396,10 +396,10 @@ useEffect(()=>{
                         className="advanced-button m-0"
                         onClick={(e)=>handleAutoBid(e)}
                      
-                        disabled={
-                          isNaN(parseFloat(previewAmount)) ||
-                          previewAmount != autoBidValue 
-                        }
+                        // disabled={
+                        //   isNaN(parseFloat(previewAmount)) 
+                          
+                        // }
                       >
                         {isAutoBid ? (
                           <>
