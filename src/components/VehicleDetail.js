@@ -22,9 +22,20 @@ import LeftInfo from "./LeftInfo.js";
 import RightInfo from "./RightInfo.js";
 import ProductCarousel from "./VehicleCarousel.js";
 import id from "date-fns/esm/locale/id/index.js";
+import '../styles/VehicleDetail.css';
 
 const url = "https://api.asisauctions.com.au"; 
 // const url  = "http://localhost:4000"
+
+const AccordionItem = ({ title, children, isOpen, onClick }) => (
+  <div className="accordion-item">
+    <button className="accordion-title" onClick={onClick}>
+      {title}
+      <span className="accordion-arrow">{isOpen ? '-' : '+'}</span>
+    </button>
+    {isOpen && <div className="accordion-content">{children}</div>}
+  </div>
+);
 
 const ProductDetail = ({ auctionId }) => {
   const location = useLocation();
@@ -522,148 +533,183 @@ const ProductDetail = ({ auctionId }) => {
     }
   };
   return (
-    <section className="car-details">
-      <div className="container">
-        <div
-          className="d-flex car-details-flex"
-          style={{ padding: "0px 20px 0px 50px", gap: "50px" }}
-        >
-          <div id="single-car" className="col-md-7">
+    <>
+      <section className="vehicle-detail-section">
+        <div className="vehicle-detail-container">
+          <div className="vehicle-detail-left">
             <ProductCarousel carId={carId} />
-            <RightInfo
-              activeTab={activeTab}
-              handleTabClick={handleTabClick}
-              vehicleType={vehicle_type}
-              auction={auction}
-            />
           </div>
-          <LeftInfo
-            auction={auction}
-            timer={timer}
-            // handleRefresh={handleRefresh}
-            amount={amount}
-            handleBidChange={handleBidChange}
-            handleBid={handleBid}
-            formData={formData}
-            handleChange={handleChange}
-            contact={contact}
-            price={price}
-            reserve_flag={reserveFlag}
-            vehicle_type={vehicle_type}
-            selectedAmount={selectedAmount}
-            setSelectedAmount={setSelectedAmount}
-            handleButtonClick={handleButtonClick}
-            setPreviewAmount={setPreviewAmount}
-            previewAmount={previewAmount}
-            ErrorToastOptions={ErrorToastOptions}
-            handleAutoBid={handleAutoBid}
-            autoBidEnabled={autoBidEnabled}
-            setAutoBidEnabled={setAutoBidEnabled}
-            autoBidValue={autoBidValue}
-            setAutoBidValue={setAutoBidValue}
-            handleAutoBidChange={handleAutoBidChange}
-            autoBidDetails={autoBidDetails}
-            handleAutoBidUpdate={handleAutoBidUpdate}
-            bidder={bidder}
-          />
-        </div>
+          <div className="vehicle-detail-right">
+            <div className="vehicle-title-row">
+              <h2>{CarDetails?.model || "TATA Truck vehicle"}</h2>
+              <span className={`status-badge ${auction?.status}`}>{auction?.status}</span>
+            </div>
+            
+            <div className="vehicle-bid-info">
+              <div className="vehicle-bid-row">
+                <div>
+                  <span className="vehicle-bid-label">Highest Bid:</span>
+                  <span className="vehicle-bid-value">$ {auction?.highest_bid || 3500}</span>
+                </div>
+                <div>
+                  <span className="vehicle-bid-label">Asking Price:</span>
+                  <span className="vehicle-bid-value">$ {auction?.asking_price || 5000}</span>
+                </div>
+              </div>
+              <div className="vehicle-bid-note">
+                <span className="bid-note-icon">ⓘ</span>
+                Price does not include a $100 Buyer Administrative Fee. Any additional Credit Card / PayPal surcharges are not covered and will be applied. Bid should be of at least of $50 increment.
+              </div>
+            </div>
 
-        <div className="contact-details-conta">
-          <div className="head-side-bar">
-            <h4>Contact Admin</h4>
-          </div>
-          <Form className="contact-form" onSubmit={contact}>
-            <Row>
-              <Col sm={6}>
-                <Form.Control
-                  type="text"
-                  placeholder="Name *"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </Col>
-              <Col sm={6}>
-                <Form.Control
-                  type="email"
-                  placeholder="Email address *"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={6}>
-                <Form.Control
-                  type="text"
-                  placeholder="Phone *"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-              </Col>
-              <Col sm={6}>
-                {" "}
-                <Form.Control
-                  as="textarea"
-                  rows={5}
-                  placeholder="Write message *"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
-              </Col>
-            </Row>
-            {/* <Form.Control
-              as="textarea"
-              rows={5}
-              placeholder="Write message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-            /> */}
-            <Row>
-              {isPlacingBid ? (
-                <button className="advanced-button pl-3 m-auto mt-4" disabled>
-                  Sending...
-                </button>
-              ) : (
-                <button
-                  className="advanced-button pl-3 m-auto mt-4"
-                  type="submit"
-                >
-                  Send enquiry <i className="fa fa-paper-plane" />
-                </button>
-              )}
-            </Row>
-          </Form>
-          <div className="subhead-side-bar m-4">
-            <h4>Ask questions</h4>
-            <h6> For example </h6>
-          </div>
-          <div className="check-boxes">
-            <ul>
-              <li>
-                <label htmlFor="c1">Can I book a test drive?</label>
-              </li>
-              <li>
-                <label htmlFor="c2">
-                  What is your adress and opening hours?
-                </label>
-              </li>
-              <li>
-                <label htmlFor="c3">Other?</label>
-              </li>
-            </ul>
+            <div className="vehicle-accordion">
+              <AccordionItem
+                title="Truck Details"
+                isOpen={activeTab === "tab1"}
+                onClick={() => handleTabClick("tab1")}
+              >
+                <table className="vehicle-details-table">
+                  <tbody>
+                    <tr>
+                      <td className="vehicle-details-label">Make:</td>
+                      <td className="vehicle-details-value">{CarDetails?.make || "IVECO"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Manufacturing Year:</td>
+                      <td className="vehicle-details-value">{CarDetails?.manufacturing_year || "2023"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Fuel Type:</td>
+                      <td className="vehicle-details-value">{CarDetails?.fuel_type || "DIESEL"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Color:</td>
+                      <td className="vehicle-details-value">{CarDetails?.color || "GREEN"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Odometer:</td>
+                      <td className="vehicle-details-value">{CarDetails?.odometer || "18000"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Vin No.:</td>
+                      <td className="vehicle-details-value">{CarDetails?.vin || "kuyt567yhf5678"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">No of Cylinders:</td>
+                      <td className="vehicle-details-value">{CarDetails?.no_of_cylinders || "12"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Transmission:</td>
+                      <td className="vehicle-details-value">{CarDetails?.transmission || "Manual"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Body Type:</td>
+                      <td className="vehicle-details-value">{CarDetails?.body_type || "TIPPER"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Engine Power:</td>
+                      <td className="vehicle-details-value">{CarDetails?.engine_power || "30.3"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">GVM:</td>
+                      <td className="vehicle-details-value">{CarDetails?.gvm || "47000"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Axle Configuration:</td>
+                      <td className="vehicle-details-value">{CarDetails?.axle_configuration || "Single Axle (SA)"}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </AccordionItem>
+              
+              <AccordionItem
+                title="Description"
+                isOpen={activeTab === "tab2"}
+                onClick={() => handleTabClick("tab2")}
+              >
+                <div className="vehicle-description">
+                  {CarDetails?.description || "for a meeting next week? We would love to walk you through the project and discuss any additional questions or requirements you may have. Thank you again for your continued support. We're here to help, so please don't hesitate to reach out."}
+                </div>
+              </AccordionItem>
+              
+              <AccordionItem
+                title="Truck Location"
+                isOpen={activeTab === "tab3"}
+                onClick={() => handleTabClick("tab3")}
+              >
+                <table className="vehicle-details-table">
+                  <tbody>
+                    <tr>
+                      <td className="vehicle-details-label">State:</td>
+                      <td className="vehicle-details-value">{CarDetails?.state || "Victoria"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Suburb:</td>
+                      <td className="vehicle-details-value">{CarDetails?.suburb || "Jeeralang Junction"}</td>
+                    </tr>
+                    <tr>
+                      <td className="vehicle-details-label">Postal Code:</td>
+                      <td className="vehicle-details-value">{CarDetails?.postal_code || "3840"}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </AccordionItem>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="vehicle-contact-section">
+        <div className="vehicle-contact-bg">
+          <div className="vehicle-contact-content">
+            <div className="vehicle-contact-questions">
+              <h2>Example Questions to Ask</h2>
+              <p>Reach out anytime — we're just a call or message away!</p>
+              <ul>
+                <li>Can I book a test drive?</li>
+                <li>What is your address and opening hours?</li>
+                <li>Is there a warranty on auctioned vehicles?</li>
+              </ul>
+            </div>
+            <form className="vehicle-contact-form" onSubmit={contact}>
+              <input 
+                type="text" 
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Name" 
+                required 
+              />
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email Address" 
+                required 
+              />
+              <input 
+                type="text" 
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Phone Number" 
+                required 
+              />
+              <textarea 
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Message" 
+                rows={4} 
+                required
+              ></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

@@ -20,7 +20,7 @@ const ProductCarousel = memo(({ carId, rerenderTrigger, deleteParam }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [images, setImages] = useState([]);
   const [imageToDelete, setImageToDelete] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null); // State to keep track of selected image
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const onChange = (index) => {
     setCurrentIndex(index);
@@ -57,10 +57,7 @@ const ProductCarousel = memo(({ carId, rerenderTrigger, deleteParam }) => {
   };
 
   const openImageModal = (image) => {
-  
-      setSelectedImage(image);
-    
-   
+    setSelectedImage(image);
   };
 
   const closeImageModal = () => {
@@ -69,14 +66,11 @@ const ProductCarousel = memo(({ carId, rerenderTrigger, deleteParam }) => {
 
   const handleDelete = async (image) => {
     const confirmed = window.confirm("Do you want to delete the image?");
-   
     if (confirmed) {
       await deleteImage(image);
+    } else {
+      setSelectedImage(null);
     }
-    else{
-      setSelectedImage(null)
-    }
-    
   };
 
   return (
@@ -88,17 +82,27 @@ const ProductCarousel = memo(({ carId, rerenderTrigger, deleteParam }) => {
       ready={!isFetchingImage}
       style={{ width: "80%" }}
     >
-      <Carousel  showThumbs={true}>
+      <Carousel
+        showThumbs={false}
+        selectedItem={currentIndex}
+        onChange={onChange}
+        swipeable={true}
+        emulateTouch={true}
+        showStatus={false}
+        showArrows={true}
+      >
         {images.map((image, index) => (
-          <div key={index} >
-            {" "}
-            {/* Open modal on image click */}
-           
-            <img className="d-block" src={image} alt={`Slide ${index}`} onClick={() => openImageModal(image)} style={{pointerEvents:"all"}} />
+          <div key={index}>
+            <img
+              className="d-block"
+              src={image}
+              alt={`Slide ${index}`}
+              onClick={() => openImageModal(image)}
+              style={{ pointerEvents: "all" }}
+            />
             {deleteParam && (
               <button
                 style={{
-                 
                   bottom: "30px",
                 }}
                 onClick={() => handleDelete(image)}
@@ -109,6 +113,25 @@ const ProductCarousel = memo(({ carId, rerenderTrigger, deleteParam }) => {
           </div>
         ))}
       </Carousel>
+      {/* === Custom Thumbnails Row START === */}
+      {images.length > 0 && (
+        <div className="carousel-thumbnails">
+          {images.map((img, idx) => (
+            <img
+              key={img}
+              src={img}
+              alt=""
+              className={
+                "carousel-thumbnail-img" + (currentIndex === idx ? " selected" : "")
+              }
+              onClick={() => setCurrentIndex(idx)}
+              tabIndex={0}
+              style={{ pointerEvents: "all" }}
+            />
+          ))}
+        </div>
+      )}
+      {/* === Custom Thumbnails Row END === */}
       <ImageModal
         image={selectedImage}
         show={selectedImage !== null}
@@ -119,15 +142,14 @@ const ProductCarousel = memo(({ carId, rerenderTrigger, deleteParam }) => {
 });
 
 export default ProductCarousel;
+
 const ImageModal = ({ image, show, onClose }) => {
   return (
-   
-    <Modal show={show} onHide={onClose} size="xl" centered  className="img-modal">
-      <Modal.Header closeButton  />
+    <Modal show={show} onHide={onClose} size="xl" centered className="img-modal">
+      <Modal.Header closeButton />
       <Modal.Body>
         <img src={image} alt="Enlarged Image" className="img-fluid" />
       </Modal.Body>
     </Modal>
-
   );
 };

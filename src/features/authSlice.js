@@ -128,9 +128,27 @@ const authSlice = createSlice({
 
     logOut: (state, action) => {
       state.user = null;
-      state.token = null;
-      localStorage.removeItem("userId");
-      localStorage.removeItem("userToken");
+  state.token = null;
+  state.userName = null;
+  state.userEmail = null;
+  state.userPhoneNumber = null;
+  state.userAddress = null;
+  state.userCity = null;
+  state.userState = null;
+  state.userSuburb = null;
+  state.userPostalCode = null;
+  state.userAge = null;
+  localStorage.removeItem("userId");
+  localStorage.removeItem("userToken");
+  localStorage.removeItem("userName");
+  localStorage.removeItem("userEmail");
+  localStorage.removeItem("userPhoneNumber");
+  localStorage.removeItem("userAddress");
+  localStorage.removeItem("userCity");
+  localStorage.removeItem("userState");
+  localStorage.removeItem("userSuburb");
+  localStorage.removeItem("userPostalCode");
+  localStorage.removeItem("userAge");
     },
   },
 });

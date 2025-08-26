@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/Layout/Layout/Layout";
 import axios from "../../utils/axios";
+import "../../styles/ForgotPasswordCustom.css";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const ForgotPassword = () => {
   const [showCodeInput, setShowCodeInput] = useState(false);
   const [email, setEmail] = useState("");
   const [editMode, setEditMode] = useState(true);
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", ""]); // Only 4 digits now
   const [loading, setLoading] = useState(false);
 
   const handleSendLinkClick = async (e) => {
@@ -92,7 +93,7 @@ const ForgotPassword = () => {
     setOtp(newOtp);
 
     // Move to the next input field if the current one is filled
-    if (value && index < 5) {
+    if (value && index < 3) { // Only 4 digits
       document.getElementById(`otp-input-${index + 1}`).focus();
     }
   };
@@ -104,65 +105,100 @@ const ForgotPassword = () => {
 
   return (
     <Layout>
-      <div className="heading-section form-container m-auto mt-3 mb-3">
-        <h2>Forgot Password</h2>
-        <Form id="Signup-form">
-          <InputGroup className="I-input mb-3">
-            <i className="fa fa-envelope" />
-            <Form.Control
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={!editMode}
-              required
-            />
-          </InputGroup>
-
-          {showCodeInput ? (
-            <>
-              <p>You have receieved an OTP!. Kindly Input here</p>
-              <div className="otp-input-container">
-                {otp.map((digit, index) => (
-                  <input
-                    key={index}
-                    id={`otp-input-${index}`}
-                    type="text"
-                    maxLength="1"
-                    value={digit}
-                    onChange={(e) => handleOtpChange(index, e.target.value)}
-                    className="otp-input"
-                  />
-                ))}
+      <div className="forgot-password-wrapper">
+        {!showCodeInput ? (
+          <>
+            <div className="forgot-password-left">
+              <div className="forgot-password-title">
+                <div className="forgot-title-top">Forgot</div>
+                <div className="forgot-title-bottom"><span className="highlight">Password?</span></div>
               </div>
-            </>
-          ) : (
-            <>
-              {" "}
-              <p>
-                Enter your email, and we'll send a code to reset your password.
-              </p>
-            </>
-          )}
-          {!showCodeInput && (
-            <button
-              className="advanced-button"
-              type="submit"
-              onClick={handleSendLinkClick}
-            >
-              SEND CODE
-            </button>
-          )}
-          {showCodeInput && (
-            <button
-              className="advanced-button"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              VERIFY CODE
-            </button>
-          )}
-        </Form>
+              <div className="forgot-password-desc">
+                Enter your registered email address below. We'll send you a verification code to reset your password securely.
+              </div>
+            </div>
+            <div className="forgot-password-right">
+              <form className="forgot-password-form" onSubmit={handleSendLinkClick}>
+                <InputGroup>
+                  <span className="input-group-text">
+                    <i className="fa fa-user" />
+                  </span>
+                  <input
+                    type="email"
+                    className="forgot-password-input"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={!editMode}
+                  />
+                </InputGroup>
+                <button className="forgot-password-btn" type="submit" disabled={loading}>
+                  {loading ? "Sending..." : "Send"}
+                </button>
+              </form>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="forgot-password-left">
+              <div style={{ fontSize: '4.5rem', fontWeight: 700, marginBottom: 12, fontFamily: 'Outfit, sans-serif' }}>
+                <span style={{ color: '#222' }}>Verify</span> <span style={{ color: '#4747e6' }}>OTP</span>
+              </div>
+              <div style={{ color: '#888', fontSize: 22, marginBottom: 32, maxWidth: 520, textAlign: 'left', fontWeight: 500, lineHeight: 1.4 }}>
+                Enter the 4-digit code sent to your email or mobile number<br/>
+                to verify your identity and continue.
+              </div>
+            </div>
+            <div className="forgot-password-right">
+              <form className="otp-form" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div className="otp-inputs" style={{ display: 'flex', gap: 24, marginBottom: 32 }}>
+                  {otp.map((digit, idx) => (
+                    <input
+                      key={idx}
+                      id={`otp-input-${idx}`}
+                      type="text"
+                      maxLength={1}
+                      value={digit}
+                      onChange={e => handleOtpChange(idx, e.target.value.replace(/[^0-9]/g, ''))}
+                      required
+                      style={{
+                        width: 64,
+                        height: 64,
+                        fontSize: 32,
+                        textAlign: 'center',
+                        borderRadius: 12,
+                        border: '1px solid #eee',
+                        background: '#f8faff',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                      }}
+                    />
+                  ))}
+                </div>
+                <button
+                  className="verify-otp-btn"
+                  type="submit"
+                  disabled={loading}
+                  style={{
+                    width: 360,
+                    height: 56,
+                    background: '#4747e6',
+                    color: '#fff',
+                    fontSize: 22,
+                    fontWeight: 600,
+                    border: 'none',
+                    borderRadius: 14,
+                    cursor: 'pointer',
+                    marginTop: 8,
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                  }}
+                >
+                  {loading ? 'Verifying...' : 'Verify & Continue'}
+                </button>
+              </form>
+            </div>
+          </>
+        )}
       </div>
     </Layout>
   );

@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/Layout/Layout/Layout";
 import axios from "../../utils/axios";
+import "../../styles/ResetPasswordCustom.css";
 
 const ResetPassword = () => {
   const location = useLocation();
@@ -85,44 +86,58 @@ const ResetPassword = () => {
   };
   return (
     <Layout>
-      <div className="heading-section form-container m-auto mt-3 mb-3">
-        <h2>Reset Password</h2>
-        <Form onSubmit={handlePwdSubmit} className="password-form">
-          <ReactPlaceholder
-            type="text"
-            color="#F0F0F0"
-            showLoadingAnimation
-            rows={5}
-            style={{ width: "80%" }}
-            ready={!loading}
-          >
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label>New Password</Form.Label>
-              <Form.Control
+      <div className="reset-password-wrapper">
+        <div className="reset-password-left">
+          <div className="reset-password-title">
+            <span className="highlight">Reset</span> Your
+            <br />
+            Password
+          </div>
+          <div className="reset-password-desc">
+            Enter your new password below to update your account and regain access. Make sure it’s strong and secure.
+          </div>
+        </div>
+        <div className="reset-password-right">
+          <form className="reset-password-form" onSubmit={handlePwdSubmit} autoComplete="off">
+            <div className="reset-input-group">
+              <span className="input-group-text">
+                <i className="fa fa-key" />
+              </span>
+              <input
                 type="password"
-                onChange={handlePwdChange}
+                className="reset-password-input"
+                placeholder="New Password"
                 name="newPassword"
-                required
-                value={values?.newPassword}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="confirm-password">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
+                value={values.newPassword}
                 onChange={handlePwdChange}
-                name="confirmPassword"
                 required
-                value={values?.confirmPassword}
               />
-            </Form.Group>
-            <div className="form-sub-sec">
-              <button type="submit" className="advanced-button">
-                Update
-              </button>
+              <span className="input-group-icon">
+                <i className="fa fa-eye" />
+              </span>
             </div>
-          </ReactPlaceholder>
-        </Form>
+            <div className="reset-input-group">
+              <span className="input-group-text">
+                <i className="fa fa-key" />
+              </span>
+              <input
+                type="password"
+                className="reset-password-input"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                value={values.confirmPassword}
+                onChange={handlePwdChange}
+                required
+              />
+              <span className="input-group-icon">
+                <i className="fa fa-eye-slash" />
+              </span>
+            </div>
+            <button className="reset-password-btn" type="submit" disabled={loading}>
+              {loading ? "Saving..." : "Save"}
+            </button>
+          </form>
+        </div>
       </div>
     </Layout>
   );

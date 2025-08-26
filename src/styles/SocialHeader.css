@@ -1,0 +1,64 @@
+#sub-header {
+  background: #181818 !important;
+  height: 48px;
+  padding: 0;
+}
+
+.social-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height:100%;
+}
+
+.social-header-left {
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.social-header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px; /* reduced gap */
+}
+
+.become-seller-btn {
+  border: 1.5px solid #fff;
+  border-radius: 24px;
+  padding: 3px 14px;
+  color: #fff;
+  background: transparent;
+  font-size: 0.92rem;
+  font-weight: 500;
+  margin-right: 10px;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.become-seller-btn:hover {
+  background: #fff;
+  color: #181818;
+}
+
+.social-icon-link {
+  color: #fff;
+  font-size: 1.08rem; /* reduced icon size */
+  margin: 0 3px;
+  transition: color 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.social-icon-link:hover {
+  color: #4747e6;
+}

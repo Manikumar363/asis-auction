@@ -1,0 +1,394 @@
+body {
+  background: #f7f8fa; /* match image 2 */
+}
+
+.vehicle-detail-section {
+  background: #f7f8fa;
+  padding: 60px 0 0 0;
+  min-height: 100vh;
+}
+.vehicle-detail-container {
+  display: flex;
+  gap: 54px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  align-items: flex-start;
+}
+.vehicle-detail-left {
+  flex: 0 0 52%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.vehicle-main-image-card {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 24px rgba(77, 101, 151, 0.1);
+  padding: 26px 24px 20px 24px;
+  width: 470px;
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.vehicle-detail-right {
+  flex: 1 1 0;
+  background: none;
+  padding: 0;
+  min-width: 340px;
+}
+.vehicle-title-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+.vehicle-title-row h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #39465e;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+.status-badge {
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 600;
+  font-size: 0.96rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #e7e9f7;
+  color: #9c27b0;
+}
+.status-badge.Closed {
+  background: #ff6b6b;
+  color: #fff;
+}
+.status-badge.Ongoing {
+  background: #51cf66;
+  color: #fff;
+}
+.vehicle-bid-info-card {
+  background: #f1f3fb;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(77, 101, 151, 0.09);
+  padding: 24px 22px 18px 22px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.vehicle-bid-label-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.vehicle-bid-label-row > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.vehicle-bid-label {
+  color: #7a7f92;
+  font-size: 1.03rem;
+  font-weight: 600;
+}
+.vehicle-bid-value {
+  color: #39465e;
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.vehicle-bid-note {
+  background: #eef0f8;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #555b70;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.bid-note-icon {
+  font-size: 1.13rem;
+  color: #7a69fa;
+  margin-top: 2px;
+}
+
+.vehicle-accordion {
+  margin-top: 22px;
+}
+.accordion-item {
+  border: 0;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(77, 101, 151, 0.04);
+  overflow: hidden;
+  transition: box-shadow 0.18s;
+}
+.accordion-item.open {
+  box-shadow: 0 6px 26px rgba(77, 101, 151, 0.12);
+}
+.accordion-title {
+  width: 100%;
+  background: #f6f7fd;
+  border: none;
+  padding: 18px 24px;
+  font-size: 1.11rem;
+  font-weight: 700;
+  color: #7a69fa;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s, color 0.2s;
+}
+.accordion-title:hover {
+  background: #edeafb;
+  color: #5e4fd3;
+}
+.accordion-arrow {
+  font-size: 1.27rem;
+  font-weight: 700;
+  color: #7a69fa;
+}
+.accordion-content {
+  padding: 0 24px 24px 24px;
+  background: #fff;
+}
+.vehicle-details-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.vehicle-details-table tr {
+  border-bottom: 1px solid #f1f3f4;
+}
+.vehicle-details-table tr:last-child {
+  border-bottom: none;
+}
+.vehicle-details-label {
+  padding: 10px 0;
+  font-weight: 600;
+  color: #7a7f92;
+  width: 40%;
+}
+.vehicle-details-value {
+  padding: 10px 0;
+  color: #39465e;
+  font-weight: 500;
+}
+.vehicle-description {
+  padding: 12px 0;
+  line-height: 1.62;
+  color: #555b70;
+  font-size: 1.01rem;
+}
+
+/* Carousel main image and thumbnails - match image 2 */
+.vehicle-main-image-card img,
+.vehicle-main-image-card .carousel-main-img {
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(77, 101, 151, 0.19);
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
+}
+.carousel-thumbnails {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 18px;
+}
+.carousel-thumbnail-img {
+  border-radius: 10px;
+  border: 2px solid transparent;
+  width: 84px;
+  height: 64px;
+  object-fit: cover;
+  transition: border-color 0.16s, box-shadow 0.16s;
+  box-shadow: 0 2px 8px rgba(77, 101, 151, 0.12);
+  cursor: pointer;
+}
+.carousel-thumbnail-img.selected,
+.carousel-thumbnail-img:focus {
+  border: 2px solid #7a69fa;
+  box-shadow: 0 4px 18px rgba(122, 105, 250, 0.10);
+}
+
+/* Contact section styles unchanged for now, but keep here for completeness */
+.vehicle-contact-section {
+  margin-top: 80px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../../public/assets/images/Bg-image.png");
+  background-size: cover;
+  background-position: center;
+  padding: 80px 0;
+  position: relative;
+}
+.vehicle-contact-bg {
+  position: relative;
+  z-index: 2;
+}
+.vehicle-contact-content {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 80px;
+  align-items: flex-start;
+  padding: 0 20px;
+}
+.vehicle-contact-questions {
+  flex: 1 1 0;
+  color: #fff;
+}
+.vehicle-contact-questions h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  font-family: "Outfit", sans-serif;
+}
+.vehicle-contact-questions p {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+.vehicle-contact-questions ul {
+  margin-top: 24px;
+  padding-left: 0;
+  list-style: none;
+}
+.vehicle-contact-questions li {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.5;
+}
+.vehicle-contact-questions li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #007bff;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.vehicle-contact-form {
+  flex: 0 0 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.form-input-wrapper {
+  position: relative;
+}
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #666;
+  z-index: 2;
+}
+.form-input-wrapper:has(textarea) .input-icon {
+  top: 20px;
+  transform: none;
+}
+.vehicle-contact-form input,
+.vehicle-contact-form textarea {
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  background: #fff;
+  padding: 16px 20px 16px 50px;
+  font-size: 1rem;
+  resize: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.vehicle-contact-form input:focus,
+.vehicle-contact-form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+.vehicle-contact-form button {
+  background: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  padding: 16px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s;
+  width: 100%;
+}
+.vehicle-contact-form button:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .vehicle-detail-container {
+    flex-direction: column;
+    gap: 40px;
+    align-items: stretch;
+  }
+  .vehicle-detail-left {
+    flex: none;
+    width: 100%;
+  }
+  .vehicle-main-image-card {
+    width: 100%;
+    padding: 18px 6vw 16px 6vw;
+  }
+  .vehicle-contact-content {
+    flex-direction: column;
+    gap: 40px;
+    align-items: stretch;
+  }
+  .vehicle-contact-form {
+    flex: none;
+    max-width: 100%;
+  }
+  .vehicle-contact-questions h2 {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .vehicle-detail-section {
+    padding: 20px 0;
+  }
+  .vehicle-detail-container {
+    padding: 0 15px;
+  }
+  .vehicle-title-row h2 {
+    font-size: 1.2rem;
+  }
+  .vehicle-bid-label-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .vehicle-contact-section {
+    padding: 60px 0;
+  }
+  .vehicle-contact-content {
+    padding: 0 15px;
+  }
+}

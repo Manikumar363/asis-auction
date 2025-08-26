@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+/* Nunito font for headings/descriptions */
+.banner-title,
+.banner-desc,
+.custom-banner-content h1 {
+  font-family: 'Nunito', 'Poppins', 'Inter', Arial, sans-serif;
+}
+
+
+
+/* Carousel indicators styling */
+.carousel-indicators {
+  position: absolute;
+  bottom: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex !important;
+  gap: 1rem;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 120px !important;       /* All indicators same width */
+  height: 3px !important;        /* All indicators same height */
+  border-radius: 3px !important;
+  background: rgba(255,255,255,0.3) !important; /* Inactive: semi-transparent */
+  border: none;
+  margin: 0;
+  position: relative;
+  transition: background 0.3s;
+  box-shadow: none;
+  top: 0;
+}
+
+/* Active indicator: only color changes, not size */
+.carousel-indicators .active {
+  background: #fff !important;   /* Active: solid white */
+  height: 3px !important;
+  width: 120px !important;
+  border-radius: 3px !important;
+  position: relative;
+}
+
+/* Optional: remove red dot above active indicator if not needed */
+.carousel-indicators .active::before {
+  display: none;
+}
+
+/* Responsive: adjust width for smaller screens */
+@media (max-width: 900px) {
+  .carousel-indicators [data-bs-target],
+  .carousel-indicators .active {
+    width: 70px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-indicators [data-bs-target],
+  .carousel-indicators .active {
+    width: 40px !important;
+  }
+}
+
+/* Remove default Bootstrap indicator padding/margin */
+.carousel-indicators li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Banner, slide, overlay, content, etc. (your original styles) */
+.custom-banner-frame {
+  position: relative;
+  width: 100vw;
+  width: 100%;
+  height: 65vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  background: rgb(0, 0, 0);
+  overflow-x: hidden;
+}
+
+.custom-banner-img {
+  position: absolute;
+  top: 20;
+  left: 20;
+  width: 100%;
+  height: 65vh;
+  object-fit: contain;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.custom-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 32, 54, 0.7);
+  z-index: 1;
+}
+
+.custom-banner-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 700px;
+  margin-left: 7vw;
+  margin-bottom: 6vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 0;
+}
+
+.custom-banner-content h1 {
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  color: #fff;
+  justify-content: flex-start;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.custom-banner-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #fff;
+  max-width: 600px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 2.2rem;
+  margin-top: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.custom-banner-btn {
+  background: #4245d2;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 16px rgba(79, 91, 232, 0.18);
+}
+
+.custom-banner-btn:hover {
+  background: #3636b2;
+}
+
+.banner-carousel-wrapper {
+  width: 100%;
+  height: 75vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-slide {
+  width: 100%;
+  height: 75vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 24, 55, 0.45);
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 700px;
+  margin-left: 7vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.banner-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+.banner-desc {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 2.2rem;
+  line-height: 1.5;
+  text-align: left;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  color: rgb(227, 223, 223);
+}
+
+.banner-btn {
+  background: #3b47e7;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.9rem 2.2rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  box-shadow: 0 2px 12px 0 rgba(59, 71, 231, 0.12);
+  transition: background 0.2s;
+  border: none;
+  outline: none;
+  display: inline-block;
+}
+.banner-btn:hover {
+  background: #232a7c;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .custom-banner-frame {
+    height: 350px;
+  }
+  .custom-banner-content h1 {
+    font-size: 2.5rem;
+  }
+  .custom-banner-content {
+    margin-left: 3vw;
+    max-width: 90vw;
+    margin-bottom: 3vh;
+  }
+  .banner-title {
+    font-size: 2.2rem;
+  }
+  .banner-content {
+    max-width: 90vw;
+    margin-left: 4vw;
+  }
+  .carousel-indicators [data-bs-target],
+  .carousel-indicators .active {
+    width: 70px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .custom-banner-frame {
+    height: 200px;
+  }
+  .custom-banner-content h1 {
+    font-size: 1.5rem;
+  }
+  .custom-banner-content p {
+    font-size: 0.9rem;
+  }
+  .custom-banner-btn {
+    padding: 0.6rem 1.1rem;
+    font-size: 0.95rem;
+  }
+  .custom-banner-content {
+    margin-bottom: 2vh;
+  }
+  .banner-title {
+    font-size: 1.4rem;
+  }
+  .banner-desc {
+    font-size: 0.95rem;
+  }
+  .banner-content {
+    margin-left: 2vw;
+    max-width: 98vw;
+  }
+  .banner-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.5rem;
+  }
+  .carousel-indicators [data-bs-target],
+  .carousel-indicators .active {
+    width: 40px !important;
+  }
+}

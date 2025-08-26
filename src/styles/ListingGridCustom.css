@@ -1,0 +1,330 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@700;400&display=swap");
+
+body {
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+}
+
+.listing-grid-wrapper {
+  padding: 32px 0 64px 0;
+  min-height: 100vh;
+  background: #f7f7fa;
+}
+
+/* Centered header section */
+.listing-grid-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 32px auto;
+  padding: 0 24px;
+}
+
+.listing-grid-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.listing-grid-title {
+  font-size: 2.7rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
+  color: #222;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.listing-grid-title-blue {
+  color: #4245d2;
+  margin-right: 8px;
+  font-weight: 700;
+}
+
+.listing-grid-subtitle {
+  font-size: 1.1rem;
+  color: #7a7a8c;
+  margin-bottom: 0.3rem;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+}
+
+/* See All Vehicles button */
+.listing-grid-seeall-btn {
+  background: #4245d2;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 2.1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(66, 69, 210, 0.08);
+  height: 44px;
+}
+
+.listing-grid-seeall-btn:hover {
+  background: #2d2f8f;
+}
+
+/* Auction Status Filter Row */
+.listing-grid-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 32px auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.listing-grid-filter-label {
+  font-size: 1.3rem;
+  color: #36363680;
+  font-weight: 500;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+  margin-bottom: 8px;
+}
+
+.listing-grid-filter-select {
+  width: 180px;
+  border-radius: 25px;
+  border: none;
+  background: #36363617;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+  font-weight: 500;
+  color: #363636;
+  transition: all 0.2s;
+  appearance: none;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.listing-grid-filter-select:focus {
+  outline: none;
+  background: #36363617;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.listing-grid-filter-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-dropdown-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.listing-grid-filter-select:hover {
+  background: #36363617;
+}
+
+/* Custom dropdown wrapper */
+.listing-grid-filter-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.listing-grid-filter-wrapper::after {
+  display: none;
+}
+
+.listing-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 1100px) {
+  .listing-grid-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .listing-grid-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.listing-grid-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.listing-grid-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+  min-height: 372px;
+  position: relative;
+  max-width: 276px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.listing-grid-card:hover {
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.16);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.listing-grid-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 170px;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.listing-grid-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px 18px 0 0;
+}
+
+.listing-grid-card-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #f7f7fa;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.3rem 1.1rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+.listing-grid-card-badge.ended {
+  background: #f29292;
+  color: #800d0d;
+}
+.listing-grid-card-badge.ongoing {
+  background: #c2fbd7;
+  color: #008000;
+}
+.listing-grid-card-badge.upcoming {
+  background: #b3d1ff;
+  color: #1a237e;
+}
+
+/* Modern Compact top line */
+.listing-grid-card-topline {
+  font-size: 1.05rem;
+  color: rgb(24, 24, 24);
+  font-weight: 600;
+  margin: 12px 0 8px 0;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+  text-align: left;
+}
+
+/* Card Body Section */
+.listing-grid-card-body {
+  padding: 16px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Card Title Row */
+.listing-grid-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.listing-grid-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+}
+
+.listing-grid-card-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4245d2;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+}
+
+/* Card Date Row */
+.listing-grid-card-date-row {
+  font-size: 0.98rem;
+  color: #7a7a8c;
+  margin-bottom: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listing-grid-card-date-label {
+  font-weight: 600;
+  color: rgb(29, 29, 29);
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+}
+
+.listing-grid-card-date {
+  font-weight: 600;
+  color: #4245d2;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+}
+
+/* Card Description */
+.listing-grid-card-desc {
+  font-size: 0.98rem;
+  color: #444;
+  margin-bottom: 1rem;
+  min-height: 44px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+}
+
+.listing-grid-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.listing-grid-card-tag {
+  background: #f7f7fa;
+  color: #4245d2;
+  font-size: 0.93rem;
+  font-weight: 500;
+  border-radius: 1rem;
+  padding: 0.3rem 1.1rem;
+  margin-bottom: 2px;
+  font-family: "Nunito", "Inter", Arial, sans-serif;
+}
+
+.listing-grid-empty {
+  text-align: center;
+  color: #888;
+  font-size: 1.2rem;
+  padding: 48px 0;
+}

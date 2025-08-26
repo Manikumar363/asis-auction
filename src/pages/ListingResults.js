@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
-import ReactPlaceholder from "react-placeholder";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Layout from "../components/Layout/Layout/Layout";
-import PageHeading from "../components/Layout/PageHeading";
-import FeaturedItem from "../components/VehicleComponent";
 import { GetAuctions } from "../features/apiCall";
+import "../styles/ListingResultsCustom.css";
+import { DiselIcon,SpeedometerIcon,CityIcon, LinesIcon} from "../components/icons"; 
 
 const ListingResults = () => {
   const location = useLocation();
@@ -19,13 +17,11 @@ const ListingResults = () => {
   const [selectedState, setSelectedState] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [filterOptions, setFilterOptions] = useState([]);
   const [startSearch, setStartSearch] = useState(false);
   const [totalNumberOfPages, setTotalNumberOfPages] = useState(0);
   const { token } = useSelector((state) => state.auth);
   const { isFetching } = useSelector((state) => state.auction);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [auctions, setAuctions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -75,171 +71,147 @@ const ListingResults = () => {
 
   return (
     <Layout>
-      <PageHeading title={vehicle_type} />
+      <div className="listing-banner">
+        <img
+          src={vehicle_type === "Truck"
+            ? "/assets/images/Heavy-weight.png"
+            : "/assets/images/Light-weight.png"}
+          alt="Banner"
+          className="listing-banner-img"
+        />
+        <div className="listing-banner-title">
+          {vehicle_type === "Truck" ? "Heavy Weight Vehicles" : "Light Weight Vehicles"}
+        </div>
+      </div>
       <section className="listing-page">
         <div className="container">
-          <div className="row">
-            <div id="listing-cars" className="col-md-9">
-              <div className="pre-featured">
-                <div className="info-text">
-                  <ReactPlaceholder
-                    type="text"
-                    color="#F0F0F0"
-                    showLoadingAnimation
-                    rows={1}
-                    style={{ width: "15%" }}
-                    ready={!isFetching}
-                  >
-                    <h4>{auctions.length} results found</h4>
-                  </ReactPlaceholder>
-                </div>
-
-                <div className="right-content">
-                  <div className="input-select">
-                    <select
-                      name="status"
-                      value={selectedStatus}
-                      onChange={(e) => {
-                        setSelectedStatus(e.target.value);
-                        handleFilter(e.target.value);
-                      }}
-                    >
-                      <option value="">Select Status</option>
-                      <option value="active">Ongoing</option>
-                      <option value="inactive">Not Started</option>
-                      <option value="closed">Closed</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <ReactPlaceholder
-                type="text"
-                color="#F0F0F0"
-                showLoadingAnimation
-                rows={5}
-                style={{ width: "80%" }}
-                ready={!isFetching}
-              >
-                {auctions && auctions.length == 0 ? (
-                  <>
-                    <h4 className="text-success text-center">
-                      No auctions Live !{" "}
-                    </h4>
-                  </>
-                ) : (
-                  <>
-                    {auctions &&
-                      auctions.map((auction, index) => (
-                        <FeaturedItem
-                          key={index}
-                          id={auction?._id}
-                          imageSrc={
-                            auction?.car.images[0] ||
-                            "/assets/images/noimage.jpeg"
-                          }
-                          title={auction?.car.model}
-                          price={auction?.highest_bid}
-                          description={auction?.car.description}
-                          auctionId={auction?._id}
-                          carId={auction?.car._id}
-                          rating={4}
-                          fuelType={auction?.car.fuel_type}
-                          odometerReading={auction?.car.odometer_reading}
-                          cityLocation={auction?.car.car_city}
-                          status={auction?.status}
-                        />
-                      ))}
-                  </>
-                )}
-              </ReactPlaceholder>
-              <div className="pagination">
-                <div className="page-numbers">
-                  <ul>
-                    {Array.from(
-                      { length: totalNumberOfPages },
-                      (_, index) => index + 1
-                    ).map((page) => (
-                      <li
-                        key={page}
-                        className={page === currentPage ? "active" : ""}
-                      >
-                        <NavLink to="#" onClick={() => handlePageChange(page)}>
-                          {page}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          <div className="listing-filters-row">
+            <input
+              type="text"
+              placeholder="Make"
+              value={selectedManufacturer}
+              onChange={(e) => setSelectedManufacturer(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Model"
+              value={selectedModel}
+              onChange={(e) => setSelectedModel(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Year"
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+            />
+            <select
+              value={selectedState}
+              onChange={(e) => setSelectedState(e.target.value)}
+            >
+              <option value="">Select State</option>
+              <option value="New South Wales">New South Wales</option>
+              <option value="Victoria">Victoria</option>
+              <option value="Queensland">Queensland</option>
+              <option value="Western Australia">Western Australia</option>
+              <option value="South Australia">South Australia</option>
+              <option value="Tasmania">Tasmania</option>
+              <option value="Australia">Australia</option>
+            </select>
+            <button className="listing-search-btn" onClick={handleFilter}>
+              Search Now
+            </button>
+          </div>
+          <div className="listing-results-summary">
+            <div className="listing-results-label">
+              Based on your search <span>{auctions.length} results found</span>
+            </div>
+            <div className="listing-status-filter">
+              <div className="status-select-wrapper">
+                
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="closed">Closed</option>
+                  <option value="active">Ongoing</option>
+                  <option value="inactive">Not Started</option>
+                </select>
               </div>
             </div>
-            <div id="sidebar" className="col-md-3">
-              <div className="sidebar-content">
-                <div className="head-side-bar">
-                  <h4>Refine Your Search</h4>
+          </div>
+          <div className="listing-results-grid">
+            {auctions.map((auction, index) => (
+              <div className="listing-card-horizontal" key={index}>
+                <div className="listing-card-image-section">
+                  <img
+                    src={auction?.car.images[0] || "/assets/images/noimage.jpeg"}
+                    alt={auction?.car.model}
+                    className="listing-card-image"
+                  />
+                  <span className="listing-status-badge">{auction.status}</span>
                 </div>
-                <div className="search-form">
-                  <div className=" mb-3">
-                    <Form.Control
-                      className="textbox"
-                      type="text"
-                      name="make"
-                      placeholder="Make"
-                      value={selectedManufacturer}
-                      onChange={(e) => setSelectedManufacturer(e.target.value)}
-                      required
-                    />
+                <div className="listing-card-details-section">
+                  <div className="listing-card-header">
+                    <div className="listing-card-title">
+                      {auction?.car.model}
+                    </div>
+                    <div className="listing-card-price">
+                      ${auction?.highest_bid}
+                    </div>
                   </div>
-                  <div className=" mb-3">
-                    <Form.Control
-                      className="textbox text-light"
-                      type="text"
-                      name="model"
-                      value={selectedModel}
-                      placeholder="Model"
-                      onChange={(e) => setSelectedModel(e.target.value)}
-                      required
-                    />
+                  <div className="listing-card-desc">
+                    {auction?.car.description}
                   </div>
-                  <div className=" mb-3">
-                    <Form.Control
-                      className="textbox"
-                      type="number"
-                      name="selectedYear"
-                      placeholder="Year"
-                      value={selectedYear}
-                      onChange={(e) => setSelectedYear(e.target.value)}
-                      required
-                    />
+                  <div className="listing-card-attributes">
+                    <span className="listing-attr">
+                    <DiselIcon /> {auction?.car.fuel_type}
+                    </span>
+                    <span className="listing-attr">
+                    <SpeedometerIcon/> {auction?.car.odometer_reading}
+                    </span>
+                    <span className="listing-attr">
+                    <CityIcon /> {auction?.car.car_city}
+                    </span>
                   </div>
-                  <div className="select mb-3">
-                    <select
-                      name="state"
-                      value={selectedState}
-                      onChange={(e) => setSelectedState(e.target.value)}
-                    >
-                      <option value="">Select State</option>
-                      <option value="New South Wales">New South Wales</option>
-                      <option value="Victoria">Victoria</option>
-                      <option value="Queensland">Queensland</option>
-                      <option value="Western Australia">
-                        Western Australia
-                      </option>
-                      <option value="South Australia">South Australia</option>
-                      <option value="Tasmania">Tasmania</option>
-                      <option value="Australia">Australia</option>
-                    </select>
-                  </div>
-                  <NavLink onClick={handleFilter} className="p-c">
-                    <button
-                      className="advanced-button m-1"
-                      disabled={isFetching}
-                    >
-                      {isFetching ? "Searching" : "Search Now"}
-                      <i className="fa fa-search" />
-                    </button>
-                  </NavLink>
+                  <button className="listing-view-btn">View Details</button>
+                  {auction?.bids?.length === 0 && (
+                    <span className="listing-no-bids">No Bids</span>
+                  )}
                 </div>
               </div>
+            ))}
+          </div>
+          <div className="pagination">
+            <div className="page-numbers">
+              <ul>
+                <li
+                  className="pagination-arrow"
+                  onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                  style={{ pointerEvents: currentPage === 1 ? "none" : "auto", opacity: currentPage === 1 ? 0.4 : 1 }}
+                >
+                  <span>&lt;</span>
+                </li>
+                {Array.from(
+                  { length: totalNumberOfPages },
+                  (_, index) => index + 1
+                ).map((page) => (
+                  <li
+                    key={page}
+                    className={page === currentPage ? "active" : ""}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </li>
+                ))}
+                <li
+                  className="pagination-arrow"
+                  onClick={() => currentPage < totalNumberOfPages && handlePageChange(currentPage + 1)}
+                  style={{ pointerEvents: currentPage === totalNumberOfPages ? "none" : "auto", opacity: currentPage === totalNumberOfPages ? 0.4 : 1 }}
+                >
+                  <span>&gt;</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

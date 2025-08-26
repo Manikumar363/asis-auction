@@ -71,7 +71,7 @@ const AutocompleteInput = ({
             // style={{ width: "100%" }}
             value={address}
             {...getInputProps({
-              placeholder: placeholder || "Search Places ...",
+              placeholder: placeholder ,
               className: "location-search-input",
             })}
             disabled={editMode}

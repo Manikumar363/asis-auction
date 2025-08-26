@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/Layout/Layout/Layout";
+import "../../styles/login.css";
 
 import { login } from "../../features/apiCall";
 
@@ -55,24 +56,30 @@ const Login = () => {
   return (
     <Layout>
       <section className="Signup-container">
-        <div className="form-image"></div>
-        <div className="heading-section form-container">
-          <h2>LOGIN ACCOUNT</h2>
+      <img src="/assets/images/top-decorative.png" alt="" className="login-decoration-top" />
+        <div className="login-left">
+          <h1>
+            <span className="highlight">Login</span> to<br />
+            Bid, Buy & Sell
+          </h1>
+          <p className="login-description">
+          Access exclusive vehicle auctions, place winning bids, and manage your listings — all in one place. Sign in to start your car trading journey today!
+          </p>
+        </div>
+        <div className="login-right">
           <Form id="Signup-form" onSubmit={handleSubmit}>
-            <InputGroup className="I-input mb-3">
+            <div className="input-wrapper">
               <i className="fa fa-envelope" />
               <Form.Control
                 type="email"
                 name="email"
-                placeholder="Enter Email"
+                placeholder="Email Address"
                 onChange={handleChange}
                 required
               />
-            </InputGroup>
-            <p>We'll never share your email with anyone else.</p>
-            <InputGroup className="I-input mb-3">
+              </div>
+              <div className="input-wrapper">
               <i className="fa fa-lock" />
-
               <Form.Control
                 type="password"
                 name="password"
@@ -80,35 +87,33 @@ const Login = () => {
                 onChange={handleChange}
                 required
               />
-            </InputGroup>
-            <FormGroup className="mb-3 ">
+              </div>
+              <div className="login-options">
               <NavLink
-                className="text-decoration-none text-muted font-weight-bold "
+                className="forgot-link "
                 to="/forgot-password"
               >
                 Forgot Password ?
               </NavLink>
-            </FormGroup>
+              </div>
             {isFetching ? (
-              <Button variant="dark" size="lg" disabled>
+              <Button className="login-btn" size="lg" disabled>
                 <Spinner animation="border" variant="light" />
               </Button>
             ) : (
-              <button className="advanced-button" type="submit">
+              <button className="login-btn" type="submit">
                 LOGIN
               </button>
             )}
           </Form>
-          <div className="signup-link mt-3">
-            <p>
-              No account?{" "}
+          <div className="signup-link ">
+              <span>No account?</span>
               <NavLink
                 to="/signup"
-                className="text-decoration-none text-muted font-weight-bold"
+                className="signup-link-highlight"
               >
                 Sign up here
               </NavLink>
-            </p>
           </div>
           {/* <div className=" social-login">
             <span className="social-label">

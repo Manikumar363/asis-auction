@@ -669,8 +669,9 @@ import { toast } from "react-toastify";
 import AutocompleteInput from "../../components/AutocompleteInput.js";
 import Layout from "../../components/Layout/Layout/Layout";
 import { getOtp, register, verifyOtp } from "../../features/apiCall";
-// import '.././././../styles/signup.css'
+// import '.././././../styles/signup.css'    
 import { OverlayTrigger,  Tooltip } from "react-bootstrap";
+import '../../styles/signup.css'
 
 const Signup = () => {
   const [selectedState, setSelectedState] = useState("");
@@ -1138,412 +1139,329 @@ const Signup = () => {
 
   return (
     <Layout>
-      <section className="Signup-container">
-        <div className="form-image"></div>
-        <div className="heading-section form-container">
-          <h2>SIGNUP ACCOUNT</h2>
+      <div className="signup-figma-layout">
+        {/* Left: Heading and Paragraph */}
+        <div className="signup-figma-left">
+          <h1>
+            <span className="highlight">Unlock<br />Access</span> to<br />
+            Trusted Auctions
+          </h1>
+          <p className="signup-description">
+            Join our vehicle marketplace to start bidding, buying, or selling with ease. Signing up takes just a minute — unlock access to trusted listings and real-time auctions today!
+          </p>
+        </div>
+
+        {/* Right: Form */}
+        <div className="signup-figma-right">
           <Form id="Signup-form" onSubmit={handleSubmit}>
-            <Container>
-              <Row>
-                <Col>
-                  <InputGroup className="I-input">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label="First Name *"
-                    >
-                      <Form.Control
-                        type="text"
-                        name="firstName"
-                        placeholder="First Name *"
-                        onChange={handleChange}
-                        required
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
+            {/* First Name */}
+            <div className="form-row">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="First Name *">
+                  <Form.Control
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name *"
+                    onChange={handleChange}
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+            </div>
 
-              <Row>
-                <Col>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label="Middle Name "
-                    >
-                      <Form.Control
-                        type="text"
-                        name="middleName"
-                        placeholder="Middle Name *"
-                        onChange={handleChange}
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-                <Col>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label="Last Name *"
-                    >
-                      <Form.Control
-                        type="text"
-                        name="lastName"
-                        placeholder="Last Name *"
-                        onChange={handleChange}
-                        required
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label="Email *"
-                    >
-                      <Form.Control
-                        type="email"
-                        name="email"
-                        placeholder="Enter email *"
-                        onChange={handleChange}
-                        required
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
+            {/* Middle Name & Last Name */}
+            <div className="form-row two-cols">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Middle Name">
+                  <Form.Control
+                    type="text"
+                    name="middleName"
+                    placeholder="Middle Name"
+                    onChange={handleChange}
+                  />
+                </FloatingLabel>
+              </InputGroup>
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Last Name *">
+                  <Form.Control
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name *"
+                    onChange={handleChange}
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+            </div>
 
-              <Row>
-                <Col>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      // label="Search Address... *"
-                    >
-                      <div className="w-100">
-                        <AutocompleteInput
-                          className="autocomplete-address"
-                          type="text"
-                          value={values.address}
-                          onChange={handleChange}
-                          onSelect={handleAutocompleteSelect}
-                          placeholder=""
-                          required
-                        />
-                      </div>
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel controlId="floatingInputGrid" label="State ">
-                      <Form.Control
-                        type="text"
-                        name="state *"
-                        value={values.state}
-                        onChange={handleChange}
-                        placeholder="State ..."
-                        required
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
+            {/* Email */}
+            <div className="form-row">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Email Address">
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    onChange={handleChange}
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+            </div>
 
-                <Col>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label="City/Town"
-                    >
-                      <Form.Control
-                        type="text"
-                        name="city *"
-                        value={values.city}
-                        onChange={handleChange}
-                        placeholder="City/Town ..."
-                        required
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel controlId="floatingInputGrid" label="Suburb">
-                      <Form.Control
-                        type="text"
-                        name="suburb *"
-                        value={values.suburb}
-                        onChange={handleChange}
-                        placeholder="Suburb ..."
-                        required
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-
-                <Col>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label="Postal code"
-                    >
-                      <Form.Control
-                        type="text"
-                        name="postal_code *"
-                        value={values.postal_code}
-                        onChange={handleChange}
-                        placeholder="Postal code/Zip code ..."
-                        required
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <InputGroup
-                    className="I-input "
-                    style={{ postion: "relative" }}
-                  >
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label="Password *"
-                    >
-                      <Form.Control
-                        type={passwordVisible ? "text" : "password"}
-                        name="password"
-                        placeholder="Password *"
-                        onChange={handleChange}
-                        className={PasswordError ? "is-invalid" : ""}
-                        required
-                      />
-
-                      <div
-                        style={{
-                          width: "fit-content",
-                          position: "absolute",
-                          right: "30px",
-                          top: "10px",
-                        }}
-                        onClick={handleTogglePasswordVisibility}
-                      >
-                        {passwordVisible ? (
-                          <i className="fa fa-eye-slash" />
-                        ) : (
-                          <i className="fa fa-eye" />
-                        )}
-                      </div>
-
-                      <div className="invalid-feedback">{PasswordError}</div>
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col sm={6} md={12}>
-                  <InputGroup className="I-input ">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label="Date of Birth *"
-                    >
-                      <Form.Control
-                        type="date"
-                        name="dob"
-                        placeholder="Date of Birth *"
-                        onChange={handleChange}
-                        required
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <InputGroup className="I-input mb-3 ">
-                    <Form.Control
-                      type="number"
-                      name="phoneNumber"
-                      placeholder="Phone Number"
+            {/* Search Places */}
+            <div className="form-row">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Search Places...">
+                  <div className="w-100">
+                    <AutocompleteInput
+                      className="autocomplete-address"
+                      type="text"
+                      value={values.address}
                       onChange={handleChange}
+                      onSelect={handleAutocompleteSelect}
                       required
                     />
-                    {isMobileVerified ? null : (
-                      <Button onClick={createOtpReq}>Verify Mobile</Button>
-                    )}
-                    {/* Show OTP input fields dynamically */}
-                  </InputGroup>
-                  {isMobileVerified && (
-                    <>
-                      <InputGroup className="I-input  d-flex">
-                        <Form.Control
-                          type="number"
-                          name="otp"
-                          placeholder="Enter OTP"
-                          onChange={handleChange}
-                          required
-                        />
-                        <Button onClick={handleVerifyOTP}>Verify OTP</Button>
-                      </InputGroup>
-                    </>
-                  )}
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <InputGroup className="I-input mb-3">
-                    <FloatingLabel
-                      controlId="floatingSelectGrid"
-                      label="Verification document type *"
-                    >
-                      <Form.Select
-                        onChange={handleChange}
-                        name="document"
-                        required
-                      >
-                        <option disabled>Select Document</option>
-                        <option name="document" value="driverslicence">
-                          Drivers Licence
-                        </option>
-                        <option name="document" value="passport">
-                          Passport
-                        </option>
-                        <option name="document" value="visa">
-                          Visa
-                        </option>
-                      </Form.Select>
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-                <Col sm={6}>
-                  <InputGroup className="I-input mb-3">
-                    {docs == "Driver License" ? (
-                      <FloatingLabel
-                        controlId="floatingSelectGrid"
-                        label="State of Vehicle Registration *"
-                      >
-                        <Form.Select
-                          className="form-control"
-                          value={selectedState}
-                          onChange={handleStateSelect}
-                          required
-                          
-                        >
-                          <option value="">Select State</option>
-                          {australianStates.map((state, index) => (
-                            <option key={index} value={state}>
-                              {state}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </FloatingLabel>
+                  </div>
+                </FloatingLabel>
+              </InputGroup>
+            </div>
+
+            {/* State & City */}
+            <div className="form-row two-cols">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="State">
+                  <Form.Control
+                    type="text"
+                    name="state"
+                    value={values.state}
+                    onChange={handleChange}
+                    placeholder="State"
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="City/Town">
+                  <Form.Control
+                    type="text"
+                    name="city"
+                    value={values.city}
+                    onChange={handleChange}
+                    placeholder="City/Town"
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+            </div>
+
+            {/* Suburb & Postal Code */}
+            <div className="form-row two-cols">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Suburb">
+                  <Form.Control
+                    type="text"
+                    name="suburb"
+                    value={values.suburb}
+                    onChange={handleChange}
+                    placeholder="Suburb"
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Postal Code">
+                  <Form.Control
+                    type="text"
+                    name="postal_code"
+                    value={values.postal_code}
+                    onChange={handleChange}
+                    placeholder="Postal Code"
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+            </div>
+
+            {/* Date of Birth */}
+            <div className="form-row">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Date of Birth">
+                  <Form.Control
+                    
+                    name="dob"
+                    placeholder="Date of Birth"
+                    onChange={handleChange}
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+            </div>
+
+            {/* Phone Number & Verify Button */}
+            <div className="form-row two-cols">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Phone Number">
+                  <Form.Control
+                    type="number"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    onChange={handleChange}
+                    required
+                  />
+                </FloatingLabel>
+              </InputGroup>
+              {!isMobileVerified && (
+                <Button
+                  style={{ marginLeft: "1rem", flex: 1, height: "56px" }}
+                  onClick={createOtpReq}
+                  className="verify-mobile-btn"
+                >
+                  Verify Mobile
+                </Button>
+              )}
+            </div>
+            {isMobileVerified && (
+              <div className="form-row">
+                <InputGroup className="I-input">
+                  <Form.Control
+                    type="number"
+                    name="otp"
+                    placeholder="Enter OTP"
+                    onChange={handleChange}
+                    required
+                  />
+                  <Button onClick={handleVerifyOTP}>Verify OTP</Button>
+                </InputGroup>
+              </div>
+            )}
+
+            {/* Verification Document Type & State of Vehicle Registration */}
+            <div className="form-row two-cols">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingSelectGrid" label="Verification Document Type">
+                  <Form.Select
+                    onChange={handleChange}
+                    name="document"
+                    required
+                  >
+                    <option value="select">^</option>
+                    <option value="driverslicence">Drivers Licence</option>
+                    <option value="passport">Passport</option>
+                    <option value="visa">Visa</option>
+                  </Form.Select>
+                </FloatingLabel>
+              </InputGroup>
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingSelectGrid" label="State of Vehicle Registration">
+                  <Form.Select
+                    className="form-control"
+                    value={selectedState}
+                    onChange={handleStateSelect}
+                    required
+                  >
+                    <option value="">^</option>
+                    {australianStates.map((state, index) => (
+                      <option key={index} value={state}>
+                        {state}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </FloatingLabel>
+              </InputGroup>
+            </div>
+
+            {/* Driver License/Passport Number */}
+            <div className="form-row">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label={docplaceholder}>
+                  <Form.Control
+                    type="text"
+                    name={
+                      docs === "Driver License" || docs === ""
+                        ? "licenceNumber"
+                        : "passportnumber"
+                    }
+                    placeholder={docplaceholder}
+                    onChange={handleChange}
+                    maxLength={
+                      docs === "Driver License" || docs === "" ? 8 : 9
+                    }
+                    required
+                    style={{ paddingLeft: 6 }}
+                  />
+                </FloatingLabel>
+              </InputGroup>
+            </div>
+
+            {/* Card Number */}
+            {docs === "Driver License" && (
+              <div className="form-row">
+                <InputGroup className="I-input">
+                  <FloatingLabel controlId="floatingInputGrid" label="Enter Card Number *">
+                    <Form.Control
+                      type="text"
+                      name="cardNumberBack"
+                      placeholder="Card Number"
+                      onChange={handleChange}
+                      required
+                      style={{ paddingLeft: 6 }}
+                    />
+                    <div className="invalid-feedback">{cardError}</div>
+                  </FloatingLabel>
+                </InputGroup>
+              </div>
+            )}
+
+            {/* Password */}
+            <div className="form-row">
+              <InputGroup className="I-input">
+                <FloatingLabel controlId="floatingInputGrid" label="Password *">
+                  <Form.Control
+                    type={passwordVisible ? "text" : "password"}
+                    name="password"
+                    placeholder="Password *"
+                    onChange={handleChange}
+                    className={PasswordError ? "is-invalid" : ""}
+                    required
+                  />
+                  <div
+                    style={{
+                      width: "fit-content",
+                      position: "absolute",
+                      right: "30px",
+                      top: "10px",
+                      cursor: "pointer"
+                    }}
+                    onClick={handleTogglePasswordVisibility}
+                  >
+                    {passwordVisible ? (
+                      <i className="fa fa-eye-slash" />
                     ) : (
-                      <FloatingLabel
-                        controlId="floatingSelectGrid"
-                        label="Country*"
-                      >
-                        <Form.Select
-                          className="form-control"
-                          value={selectedCountry}
-                          onChange={handleCountrySelect}
-                          name = "country"
-                          required
-                        >
-                          <option value="">Select Country</option>
-                          {countries.map((country, index) => (
-                            <option key={index} value={country}>
-                              {country}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </FloatingLabel>
+                      <i className="fa fa-eye" />
                     )}
-                  </InputGroup>
-                </Col>
-              </Row>
-              <Row>
-                <Col sm={12}>
-                  <InputGroup className="I-input mb-3">
-                    <FloatingLabel
-                      controlId="floatingInputGrid"
-                      label={docplaceholder}
-                    >
-                      <Form.Control
-                        type="text"
-                        name={
-                          docs === "Driver License" || docs === ""
-                            ? "licenceNumber"
-                            : "passportnumber"
-                        }
-                        placeholder={docplaceholder}
-                        onChange={handleChange}
-                        maxLength={
-                          docs === "Driver License" || docs === "" ? 8 : 9
-                        }
-                        required
-                        style={{ paddingLeft: 6 }}
-                      />
-                    </FloatingLabel>
-                  </InputGroup>
-                </Col>
-              </Row>
+                  </div>
+                  <div className="invalid-feedback">{PasswordError}</div>
+                </FloatingLabel>
+              </InputGroup>
+            </div>
 
-              <Row>
-                <Col>
-                  {docs == "Driver License" && (
-                    <InputGroup className="I-input ">
-                       <OverlayTrigger
-                      placement="left"
-                      overlay={
-                        <Tooltip>
-                         please turn your card to get card number, it should be 10 digit
-                        </Tooltip>
-                      }
-                    >
-                      <span className="mr-4  float-left">
-                        <i className="fas fa-info-circle text-dark"></i>
-                      </span>
-                    </OverlayTrigger>
-                      <FloatingLabel
-                        controlId="floatingInputGrid"
-                        label="Enter Card Number *"
-                      >
-                        <Form.Control
-                          type="text"
-                          name="cardNumberBack"
-                          placeholder="Card Number "
-                          onChange={handleChange}
-                          required
-                          style={{ paddingLeft: 6 }}
-                        />
-                       
-                        <div className="invalid-feedback">{cardError}</div>
-                      </FloatingLabel>
-                    </InputGroup>
-                  )}
-                  
-                </Col>
-              </Row>
-
+            {/* Submit Button */}
+            <div className="form-row">
               {isFetching ? (
                 <Button variant="dark" size="lg" disabled>
                   <Spinner animation="border" variant="light" />
                 </Button>
               ) : (
                 <button
-                  className="advanced-button"
+                  className="signup-button"
                   type="submit"
                   disabled={!otpcheck}
                 >
                   Sign Up
                 </button>
               )}
-            </Container>
+            </div>
           </Form>
           <div className="login-link mt-3">
             <p>
@@ -1557,7 +1475,7 @@ const Signup = () => {
             </p>
           </div>
         </div>
-      </section>
+      </div>
     </Layout>
   );
 };

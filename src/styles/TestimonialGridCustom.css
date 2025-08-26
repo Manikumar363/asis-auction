@@ -1,0 +1,117 @@
+.testimonial-decor-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.testimonial-grid-section {
+  background: #f7f7fa;
+  padding: 0 0 80px 0;
+  min-height: 60vh;
+  position: relative;
+}
+
+.testimonial-grid-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.testimonial-grid-title {
+  font-size: 2.7rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.testimonial-grid-title-black {
+  color: #222;
+}
+
+.testimonial-grid-title-blue {
+  color: #4245d2;
+}
+
+.testimonial-grid-subtitle {
+  font-size: 1.1rem;
+  color: #7a7a8c;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  justify-items: center;
+}
+
+@media (max-width: 1100px) {
+  .testimonial-grid-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .testimonial-grid-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.testimonial-card-custom {
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.1);
+  padding: 40px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 340px;
+  max-width: 400px;
+  min-height: 390px;
+  margin: 0 auto;
+}
+
+.testimonial-card-stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.testimonial-card-star {
+  width: 38px;
+  height: 38px;
+  display: inline-block;
+}
+
+.testimonial-card-desc {
+  font-size: 1.25rem;
+  color: #222;
+  text-align: center;
+  margin-bottom: 32px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.testimonial-card-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 18px;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+}
+
+.testimonial-card-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #222;
+  text-align: center;
+}

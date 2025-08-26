@@ -1,0 +1,137 @@
+/* Footer Custom Styles */
+.footer-custom-bg {
+  background: #181818;
+  color: #fff;
+  padding: 0;
+  width: 100%;
+}
+
+.footer-custom-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 32px 0 32px;
+}
+
+.footer-custom-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.footer-custom-left {
+  flex: 1 1 340px;
+  min-width: 320px;
+}
+
+.footer-custom-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #fff;
+}
+
+.footer-custom-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-custom-contact-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  color: #bdbdbd;
+  font-size: 1.08rem;
+}
+
+.footer-custom-icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #232323;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  font-size: 1.25rem;
+  color: #bdbdbd;
+}
+
+.footer-custom-contact-list span:last-child {
+  color: #bdbdbd;
+  font-size: 1.08rem;
+  line-height: 1.5;
+}
+
+.footer-custom-right {
+  flex: 1 1 400px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footer-custom-links-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: #fff;
+  text-align: right;
+  width: 100%;
+}
+
+.footer-custom-links-cols {
+  display: flex;
+  gap: 48px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.footer-custom-links-cols ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-custom-links-cols li {
+  margin-bottom: 14px;
+}
+
+.footer-custom-links-cols a {
+  color: #bdbdbd;
+  text-decoration: none;
+  font-size: 1.08rem;
+  transition: color 0.2s;
+}
+
+.footer-custom-links-cols a:hover {
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .footer-custom-main {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .footer-custom-right {
+    align-items: flex-start;
+    margin-top: 24px;
+  }
+  .footer-custom-links-title {
+    text-align: left;
+  }
+  .footer-custom-links-cols {
+    justify-content: flex-start;
+  }
+}
+
+.footer-custom-bottom {
+  text-align: center;
+  color: #bdbdbd;
+  font-size: 1rem;
+  padding: 32px 0 18px 0;
+  margin-top: 24px;
+  border-top: 1px solid #232323;
+}

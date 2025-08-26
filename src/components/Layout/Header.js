@@ -1,266 +1,207 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
-import React, { useEffect, useRef, useState } from "react";
-import { Button } from "react-bootstrap";
-import CloseButton from "react-bootstrap/CloseButton";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import "../../styles/HeaderCustom.css";
+import { useDispatch } from "react-redux";
 import { logOut } from "../../features/authSlice";
-import { toast } from "react-toastify";
 
-const Headerr = () => {
-  const { token } = useSelector((state) => state.auth);
-  const { userName } = useSelector((state) => state.auth);
-  const [isNavbarToggled, setNavbarToggled] = useState(false);
+const Header = () => {
   const [search, setSearch] = useState("");
-  const [isInputVisible, setInputVisible] = useState(false);
-
-  // const firstName = userName.split(" ")[0];
-
-
-  const navbarRef = useRef(null);
-  const dispatch = useDispatch();
-  const path = useLocation();
   const navigate = useNavigate();
+  const [isBuyDropdownOpen, setBuyDropdownOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogout = async () => {
-    await dispatch(logOut());
-  };
-  const toggleInputVisibility = () => {
-    setInputVisible(!isInputVisible);
-  };
-  const handleSearch = async (e) => {
+  // Profile dropdown state
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const dropdownRef = useRef(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Check login status and get user info from localStorage
+    const checkAuth = () => {
+      const token = localStorage.getItem("userToken");
+      const userJson = localStorage.getItem("user");
+      let loggedIn = false;
+      let userObj = null;
+      if (token) {
+        loggedIn = true;
+      } else if (userJson) {
+        try {
+          userObj = JSON.parse(userJson);
+          if (userObj && userObj.token) {
+            loggedIn = true;
+          }
+        } catch (e) {
+          userObj = null;
+        }
+      }
+      setIsLoggedIn(loggedIn);
+      setUser(userObj);
+    };
+    checkAuth();
+    // Listen for storage changes (e.g., login/logout in other tabs)
+    const handleStorage = (event) => {
+      if (event.key === "userToken" || event.key === "user") {
+        checkAuth();
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setProfileDropdownOpen(false);
+      }
+    }
+    if (profileDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileDropdownOpen]);
+
+  const handleSearch = () => {
     if (search) {
       navigate(`/search/${search}`);
     }
-    else {
-      toast.warn('No Model Name Entered', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        progress: undefined,
-        theme: "light",
-
-      });
-    }
   };
-  useEffect(() => {
-    const handleNavbarItemClick = () => {
-      setNavbarToggled(false);
-    };
 
-    let handleDocumentClick = (event) => {
-      if (
-        isNavbarToggled &&
-        navbarRef.current &&
-        !navbarRef.current.contains(event.target)
-      ) {
-        setNavbarToggled(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleDocumentClick);
-    document.addEventListener("touchend", handleDocumentClick);
-
-    return () => {
-      document.removeEventListener("mousedown", handleDocumentClick);
-      document.removeEventListener("touchend", handleDocumentClick);
-    };
-  }, [isNavbarToggled]);
-
-  const handleNavbarToggle = () => {
-    setNavbarToggled(!isNavbarToggled);
-    toggleInputVisibility();
-  };
   const handleVehicle = (selectedVehicleType) => {
-    // alert(selectedVehicleType);
-
     localStorage.setItem("vehicle_type", selectedVehicleType);
     navigate("/SeeAll", { state: { vehicle_type: selectedVehicleType } });
-    // navigate("/SeeAll");
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("user");
+    dispatch(logOut()); // Clear Redux state
+    setIsLoggedIn(false);
+    setUser(null);
+    setProfileDropdownOpen(false);
+    navigate("/");
+  };
+
+  const handleProfileClick = () => {
+    setProfileDropdownOpen((open) => !open);
+  };
+
+  console.log('Header render: isLoggedIn =', isLoggedIn, 'user =', user);
+
   return (
-    <Navbar expand="lg" className="site-header bg-body-tertiary">
-      <div className="inner-header container clearfix">
-        <Container className="header-container">
-          <div className="logo">
-            <NavLink to="/">
-              <Navbar.Brand>
-                <img src="/assets/images/logo2.png" className="logo" />
-              </Navbar.Brand>
-            </NavLink>
-          </div>
-          {!isNavbarToggled ? (
-            <Navbar.Toggle
-              onClick={handleNavbarToggle}
-              aria-controls="basic-navbar-nav"
-              id="toggle-bar"
-            />
-          ) : (
-            <Navbar.Toggle
-              onClick={handleNavbarToggle}
-              aria-controls="basic-navbar-nav"
-              id="toggle-bar"
-            >
-              <CloseButton ref={navbarRef} id="toggle-close" />
-            </Navbar.Toggle>
-          )}
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto main-navigation text-left hidden-xs hidden-sm">
-              <ul>
-                <li>
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                  {/* <NavLink to="/SeeAll">Buy</NavLink> */}
-                  <div className="custom-dropdown">
-                    <span className="main-item">Buy</span>
-                    <ul className="dropdown-list">
-                      <li className="dropdown-buy">
-                        <Button
-                          onClick={() => {
-                            handleVehicle("Truck");
-                          }}
-                          className="no-style"
-                        >
-                          <img
-                            src="/assets/icons/truck.svg"
-                            height={40}
-                            style={{ marginTop: "10px", marginRight: "20px" }}
-                          />
-                          Heavy weight Vehicles
-                        </Button>
-                      </li>
-                      <li>
-                        <Button
-                          onClick={() => {
-                            handleVehicle("Car");
-                          }}
-                          className="no-style"
-                        >
-                          <img
-                            src="/assets/icons/acr.svg"
-                            height={40}
-                            style={{ marginRight: "20px" }}
-                          />
-                          Light weight Vehicles
-                        </Button>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/user/upload-product">Sell </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/services">Services</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/contact">Contact</NavLink>
-                </li>
-              </ul>
-            </Nav>
-
-            <div className="search-container">
-              <div className="search-icon" onClick={handleSearch}>
-                <i className="fa fa-search" />
-              </div>
-              <input
-                autocomplete="false"
-                className="form-control form-control-sm ml-3 w-75 nav-link"
-                type="text"
-                name="search"
-                placeholder="Search any Model"
-                aria-label="Search"
-                onChange={(e) => setSearch(e.target.value)}
-
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    handleSearch();
-                  }
-                }} // Call handleSearch on Enter key press
-              />
-            </div>
-
-            {token ? (
-              <div className="dropdown-container">
-                <a href="#">
-                  <div className="search-container none">
-                    <div className="search-icon">
-                      <i className="fa fa-user" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </a>
-                <ul
-                  className="dropdown-menu"
-                  style={{ width: "100%", background: "#336699" }}
+    <header className="header-custom-wrapper">
+      <div className="header-custom-logo">
+        <NavLink to="/">
+          <img src="/assets/images/logo2.png" alt="Logo" className="header-custom-logo-img" />
+        </NavLink>
+      </div>
+      <div className="header-custom-right-group">
+        <nav className="header-custom-nav">
+          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
+          <div
+            className="header-custom-dropdown"
+            onMouseEnter={() => setBuyDropdownOpen(true)}
+            onMouseLeave={() => setBuyDropdownOpen(false)}
+          >
+            <span className="header-custom-dropdown-label">
+              Buy
+              <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: 6, verticalAlign: 'middle' }}>
+                <path d="M6.33317 8.33333L10.4998 12.5L14.6665 8.33333" stroke="#363636" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            {isBuyDropdownOpen && (
+              <div className="header-custom-dropdown-menu">
+                <div
+                  className="header-custom-dropdown-item"
+                  onClick={() => handleVehicle("Truck")}
                 >
-                  <li
-                    className="text-center  text-warning"
-                    style={{ backgroundColor: "#2E5D8E" }}
-                  >
-                    <h6 className="p-3">
-                      Hi!  <span>{userName}</span> <img src="/assets/icons/hi.svg" width={18} style={{ margin: "0px 3px" }} />
-
-                    </h6>
-                  </li>
-
-                  <NavLink to={`/dashboard/user`}>
-                    <li className="dropdown-menu-item">Profile</li>
-                  </NavLink>
-                  <NavLink to={`/dashboard/user/Bidding_history`}>
-                    <li className="dropdown-menu-item">
-                      Purchases and
-                      <br /> Bids History
-                    </li>
-                  </NavLink>
-                  <NavLink to={`/dashboard/user/upload-product`}>
-                    <li className="dropdown-menu-item">
-                      Auctions and
-                      <br />
-                      Sold History
-                    </li>
-                  </NavLink>
-                  <li className="dropdown-menu-item">
-                    <NavLink
-                      role="button"
-                      tabIndex="0"
-                      onClick={handleLogout}
-                      to={"/"}
-                      className="logout"
-                    >
-                      Logout
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <div className="login-signup">
-                <NavLink
-                  to="/login"
-                  className="btn nav-link advanced-button"
-                  style={{ width: "100px" }}
+                  <img src="/assets/icons/truck.svg" alt="Truck" style={{ width: 32, marginRight: 12 }} />
+                  <span className="dropdown-bold">HEAVY WEIGHT VEHICLES</span>
+                </div>
+                <div
+                  className="header-custom-dropdown-item"
+                  onClick={() => handleVehicle("Car")}
                 >
-                  LOGIN
-                </NavLink>
-                <NavLink
-                  to="/signup"
-                  className="btn nav-link advanced-button"
-                  style={{ width: "100px" }}
-                >
-                  SIGN UP
-                </NavLink>
+                  <img src="/assets/icons/acr.svg" alt="Car" style={{ width: 32, marginRight: 12 }} />
+                  <span className="dropdown-bold">LIGHT WEIGHT VEHICLES</span>
+                </div>
               </div>
             )}
-          </Navbar.Collapse>
-        </Container>
+          </div>
+          <NavLink to="/dashboard/user/upload-product">Sell</NavLink>
+          <NavLink to="/services">Services</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+        </nav>
+        <div className="header-custom-search">
+          <input
+            type="text"
+            placeholder="Search any model"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            onKeyDown={e => { if (e.key === "Enter") handleSearch(); }}
+          />
+          <button className="header-custom-search-btn" onClick={handleSearch}>
+            <i className="fa fa-search" />
+          </button>
+        </div>
+        {isLoggedIn ? (
+          <div className="header-custom-profile-dropdown-wrapper" ref={dropdownRef}>
+            <button
+              className="header-custom-profile-btn"
+              onClick={handleProfileClick}
+              aria-label="Profile"
+            >
+              <i className="fa fa-user-circle" style={{ fontSize: 28, color: "#4747e6" }} />
+            </button>
+            {profileDropdownOpen && (
+              <div className="header-custom-profile-dropdown-menu">
+                <div className="profile-dropdown-header">
+                  Hi! {user ? user.name : "User"}
+                  {user && user.avatar && (
+                    <img src={user.avatar} alt="Avatar" className="profile-avatar" />
+                  )}
+                </div>
+                <div
+                  className="profile-dropdown-item"
+                  onClick={() => { navigate("/profile"); setProfileDropdownOpen(false); }}
+                >
+                  Profile
+                </div>
+                <div
+                  className="profile-dropdown-item"
+                  onClick={() => { navigate("/purchases-bids-history"); setProfileDropdownOpen(false); }}
+                >
+                  Purchases and Bids History
+                </div>
+                <div
+                  className="profile-dropdown-item"
+                  onClick={() => { navigate("/auctions-sold-history"); setProfileDropdownOpen(false); }}
+                >
+                  Auctions and Sold History
+                </div>
+                <div className="profile-dropdown-divider" />
+                <button
+                  className="profile-dropdown-logout-btn"
+                  onClick={handleLogout}
+                >
+                  LOGOUT
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <NavLink to="/login" className="header-custom-login-btn">
+            Login
+          </NavLink>
+        )}
       </div>
-    </Navbar>
+    </header>
   );
 };
 
-export default Headerr;
+export default Header;
